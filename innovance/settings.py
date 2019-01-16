@@ -25,7 +25,7 @@ SECRET_KEY = 'uzyfygqkq$7wh%ir1i8vh3b%54+a#9ok%x=1z_wbt*qi@may=#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'dev.innovance19.in', 'innovance19.in']
 
 
 # Application definition
