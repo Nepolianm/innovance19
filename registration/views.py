@@ -4,7 +4,7 @@ from .models import Registration
 
 # Create your views here.
 def registration(request):
-    return render(request, "home.html", {})
+    return render(request, "exetera.htm", {})
 
 
 def register(request):
