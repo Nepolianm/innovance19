@@ -130,3 +130,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'static',
 ]
+
+
+TEXTLOCAL_APIKEY = '+ZHrMUquZII-pPuJXzidhxX6raYjBzyIXfoNl1nD6O'
+SMS_SEND_LINK = 'https://api.textlocal.in/send/?'
