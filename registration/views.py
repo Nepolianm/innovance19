@@ -20,10 +20,12 @@ def register(request):
     tshirt = request.POST.get('tshirt')
     is_veg = True if request.POST.get('is_veg') == 1 else False
     accom = True if request.POST.get('accom_needed') == 1 else False
+    referral = request.POST.get('referral_code')
 
     r = Registration.objects.create(name=name, email=email, mob=phone, college=college,
                                     is_ieee_member=is_ieee, member_id=member_id,
-                                    t_shirt_size=tshirt, accommodation=accom, is_veg=is_veg)
+                                    t_shirt_size=tshirt, accommodation=accom, is_veg=is_veg,
+                                    referral_code=referral)
     if r:
         # success
         return render(request, "success.html", {})

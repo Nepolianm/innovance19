@@ -6,7 +6,7 @@ from .models import Registration
 
 @admin.register(Registration)
 class RegisterAdmin(admin.ModelAdmin):
-    list_display = ['name', 'college', 'email', 'mob', 'is_veg', 'accommodation', 'is_ieee_member',
+    list_display = ['name', 'college', 'email', 'mob', 'referral_code', 'is_veg', 'accommodation', 'is_ieee_member',
                     'member_id', 't_shirt_size']
     list_display_links = list_display[:]
-    list_filter = ['college', 'is_veg', 'accommodation', 'is_ieee_member', 't_shirt_size']
+    list_filter = ['college', 'is_veg', 'accommodation', 'is_ieee_member', 't_shirt_size', 'referral_code']
