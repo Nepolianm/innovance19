@@ -1,0 +1,84 @@
+body{
+  background:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url(m.jpg) center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: sans-serif;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#form .container h1 {
+
+  color: #fff;
+  font-family: Poppins;
+}
+#form h3 {
+  color: #fff;
+  font-family: Poppins;
+}
+form {
+
+  transition: all 4s ease-in-out;
+}
+.form-control{
+
+  background: transparent ;
+  color: #fff;
+  border:none;
+  outline: none;
+  border-bottom: 1px solid gray;
+  padding: 15px;
+  font-size: 18px;
+  margin-bottom: 16px;
+  width:60%;
+
+}
+.form-control1{
+
+  background: transparent ;
+  color: #fff;
+  border:none;
+  outline: none;
+  border-bottom: 1px solid gray;
+  padding: 15px;
+  font-size: 18px;
+  margin-bottom: 16px;
+  width:62%;
+
+}
+#image{
+  background: transparent;
+  border:none;
+  outline: none;
+  font-size: 18px;
+  margin-bottom: 16px;
+  width:60%;
+}
+input{
+  height: 45px;
+}
+.submit{
+background: orange;
+border:none;
+width:60%;
+margin-bottom: 15px;
+}
+.mini{
+  background: orange;
+  border:none;
+  width:60%;
+  margin-bottom: 15px;
+  height:45px;
+}
+a{
+  color:#fff;
+  border: 1px solid;
+  text-decoration: none;
+  transition: .6s ease;
+}
+a:hover{
+  color: #000;
+  background: #fff;
+}
