@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title-section %} Registration {% endblock %}
+
+{% block body-section %}
+    <div class="row" style="margin-bottom: 10vh">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <form action="" method="post" role="form">
+                {%  csrf_token %}
+                <legend>Register Now</legend>
+
+                <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" name="name" id="" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="">College</label>
+                    <select name="college" id="inputID" class="form-control">
+                    <option value="0"> -- Select One --</option>
+                    <option value="GECT">Government Engineering College Thrissur</option>
+                </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="" placeholder="Phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="" style="margin-right: 3vw">Is IEEE Member</label>
+                    Yes
+                    <input type="radio" name="ieee_member" id="inputID" value="1" checked="checked" style="margin-right: 3vw">
+                    No
+                    <input type="radio" name="ieee_member" id="inputID" value="0" >
+                </div>
+                <div class="form-group">
+                    <label for="">Member ID <small>( only applicable for existing members )</small></label>
+                    <input type="text" class="form-control" name="member_id" id="" placeholder="Member ID">
+                </div>
+                <div class="form-group">
+                    <label for="">T-Shirt Size </label>
+                    <select name="tshirt" id="inputID" class="form-control">
+                        <option value="0"> -- Select One --</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="" style="margin-right: 3vw">Food</label>
+                    Vegetarian
+                    <input type="radio" name="is_veg" id="inputID" value="1" checked="checked" style="margin-right: 3vw">
+                    Non - Vegetarian
+                    <input type="radio" name="is_veg" id="inputID" value="0" >
+                </div>
+                <div class="form-group">
+                    <label for="" style="margin-right: 3vw">Accommodation</label>
+                    Yes
+                    <input type="radio" name="accom_needed" id="inputID" value="1" checked="checked" style="margin-right: 3vw">
+                    No
+                    <input type="radio" name="accom_needed" id="inputID" value="0" >
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

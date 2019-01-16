@@ -19,5 +19,5 @@ from registration import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.registration),
-    path('register', views.register),
+    path('register/', views.register),
 ]
