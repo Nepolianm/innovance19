@@ -1,5 +1,9 @@
+import datetime
+import urllib
+from innovance import settings
 from django.shortcuts import render
 from .models import Registration
+from datetime import datetime
 
 
 # Create your views here.
@@ -20,15 +24,33 @@ def register(request):
     tshirt = request.POST.get('tshirt')
     is_veg = True if request.POST.get('is_veg') == 1 else False
     accom = True if request.POST.get('accom_needed') == 1 else False
+    referral = request.POST.get('referral_code')
 
     r = Registration.objects.create(name=name, email=email, mob=phone, college=college,
                                     is_ieee_member=is_ieee, member_id=member_id,
-                                    t_shirt_size=tshirt, accommodation=accom, is_veg=is_veg)
+                                    t_shirt_size=tshirt, accommodation=accom, is_veg=is_veg,
+                                    referral_code=referral)
     if r:
         # success
+        # send sms
+        message = "Hi %s,\nYou have successfully registered for Innovance '19, on %s.\nYour ID is %s.\nReach us at " \
+                  "http://innovance19.in\nThank you :) "
+        today = datetime.now().strftime("%d %B %Y")
+        x = send_sms(r.mob, message % (name, today, str(r.id)))
+        print(x)
         return render(request, "success.html", {})
     else:
         return render(request, "failed.html", {})
     # fetch the data
     # create row in table
     # return acknowldegement page
+
+
+def send_sms(recepient, message):
+    data = urllib.parse.urlencode({'apikey': settings.TEXTLOCAL_APIKEY, 'numbers': recepient,
+                                   'message': message})
+    data = data.encode('utf-8')
+    request = urllib.request.Request("https://api.textlocal.in/send/?")
+    f = urllib.request.urlopen(request, data)
+    fr = f.read()
+    return (fr)
