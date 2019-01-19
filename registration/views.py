@@ -61,7 +61,7 @@ def send_sms(recepient, message):
     return (fr)
 
 @csrf_exempt
-def payment_complete(request):
+def complete_payment(request):
     if request.method != "GET":
         return HttpResponse("<h1>Not Found</h1>")
 
@@ -70,6 +70,6 @@ def payment_complete(request):
     email = json_data['userEmailId']
     print("json %s" % data)
     print("email %s " % email)
-    user = Registration.objects.get(email=email)
-    user.is_paid = True
-    user.save()
+    # user = Registration.objects.get(email=email)
+    # user.is_paid = True
+    # user.save()
