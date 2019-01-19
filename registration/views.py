@@ -94,21 +94,21 @@ def complete_payment(request):
 
     for answer in answerList:
         if answer['question'] == 'College':
-            college = answer['question']
+            college = answer['answer']
         elif answer['question'] == 'Contact Number':
-            phone = answer['question'][3:]
+            phone = answer['answer'][3:]
         elif answer['question'] == 'T Shirt Size':
-            tshirt = answer['question']
+            tshirt = answer['answer']
         elif answer['question'] == 'Food':
-            if answer['question'] != "Vegetarian":
+            if answer['answer'] != "Vegetarian":
                 is_veg = False
         elif answer['question'] == 'Referral Code':
-            referral = answer['question']
+            referral = answer['answer']
         elif answer['question'] == 'Accommodation Needed':
-            if answer['question'] == 'No':
+            if answer['answer'] == 'No':
                 accomm = False
         elif answer['question'] == 'IEEE Membership ID':
-            member_id = answer['question']
+            member_id = answer['answer']
 
     if ticketPrice == 20:
         is_ieee = False
