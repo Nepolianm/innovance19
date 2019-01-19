@@ -77,16 +77,46 @@ def complete_payment(request):
 
     name = json_data['userName']
     ticketPrice = json_data['ticketPrice']
-    answerList = json.loads(json_data['answerList'])
+    answerList = json_data['answerList']
     order_id = json_data['uniqueOrderId']
     timestamp = json_data['registrationTimestamp']
+    phone = ""
+    college = ""
+    tshirt = ""
+    is_veg = True
+    accomm = True
+    referral = ""
+    is_ieee = True
+    member_id = ""
     print("name %s\nprice %s\nanswerList " % (name, ticketPrice), answerList)
     print("order_id %s\n timestamp %s" % (order_id, timestamp))
 
     for answer in answerList:
-        if answer['question'] == 'Contact Number':
-            send_sms(answer['question'], name, email )
-            break
+        if answer['question'] == 'College':
+            college = answer['question']
+        elif answer['question'] == 'Contact Number':
+            phone = answer['question']
+        elif answer['question'] == 'T Shirt Size':
+            tshirt = answer['question']
+        elif answer['question'] == 'Food':
+            if answer['question'] != "Vegetarian":
+                is_veg = False
+        elif answer['question'] == 'Referral Code':
+            referral = answer['question']
+        elif answer['question'] == 'Accommodation Needed':
+            if answer['question'] == 'No':
+                accomm = False
+        elif answer['question'] == 'IEEE Membership ID':
+            member_id = answer['question']
+
+    if ticketPrice == 20:
+        is_ieee = False
+
+    r = Registration.objects.create(name=name, email=email, mob=phone, is_veg=is_veg, accommodation=accomm,
+                                    is_ieee_member=is_ieee, member_id=member_id, college=college, t_shirt_size=tshirt,
+                                    referral_code=referral)
+    send_sms(phone,name,email)
+
     # user = Registration.objects.get(email=email)
     # user.is_paid = True
     # user.save()
