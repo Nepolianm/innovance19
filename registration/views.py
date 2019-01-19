@@ -51,18 +51,22 @@ def registration(request):
 #     # return acknowldegement page
 
 
-def send_sms(recepient, message):
+def send_sms(recepient, name, email):
+    today = datetime.now().strftime("%d %B %Y")
+    message = "Hi %s,\nYou have successfully registered for Innovance '19, on %s using the email ID %s.\nReach us at " \
+              "http://innovance19.in\nThank you :)" % (name, today, email)
     data = urllib.parse.urlencode({'apikey': settings.TEXTLOCAL_APIKEY, 'numbers': recepient,
                                    'message': message})
     data = data.encode('utf-8')
     request = urllib.request.Request("https://api.textlocal.in/send/?")
     f = urllib.request.urlopen(request, data)
     fr = f.read()
-    return (fr)
+    print(fr)
+
 
 @csrf_exempt
-def payment_complete(request):
-    if request.method != "GET":
+def complete_payment(request):
+    if request.method != "POST":
         return HttpResponse("<h1>Not Found</h1>")
 
     data = request.POST.get("data")
@@ -70,6 +74,19 @@ def payment_complete(request):
     email = json_data['userEmailId']
     print("json %s" % data)
     print("email %s " % email)
-    user = Registration.objects.get(email=email)
-    user.is_paid = True
-    user.save()
+
+    name = json_data['userName']
+    ticketPrice = json_data['ticketPrice']
+    answerList = json.loads(json_data['answerList'])
+    order_id = json_data['uniqueOrderId']
+    timestamp = json_data['registrationTimestamp']
+    print("name %s\nprice %s\nanswerList " % (name, ticketPrice), answerList)
+    print("order_id %s\n timestamp %s" % (order_id, timestamp))
+
+    for answer in answerList:
+        if answer['question'] == 'Contact Number':
+            send_sms(answer['question'], name, email )
+            break
+    # user = Registration.objects.get(email=email)
+    # user.is_paid = True
+    # user.save()
