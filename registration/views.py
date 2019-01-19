@@ -1,9 +1,12 @@
 import datetime
 import urllib
+
+from django.http import HttpResponse
 from innovance import settings
 from django.shortcuts import render
 from .models import Registration
 from datetime import datetime
+import json
 
 
 # Create your views here.
@@ -34,7 +37,7 @@ def register(request):
         # success
         # send sms
         message = "Hi %s,\nYou have successfully registered for Innovance '19, on %s.\nYour ID is %s.\nReach us at " \
-                  "http://innovance19.in\nThank you :) "
+                  "http://innovance19.in\nThank you :)"
         today = datetime.now().strftime("%d %B %Y")
         x = send_sms(r.mob, message % (name, today, str(r.id)))
         print(x)
@@ -54,3 +57,17 @@ def send_sms(recepient, message):
     f = urllib.request.urlopen(request, data)
     fr = f.read()
     return (fr)
+
+
+def payment_complete(request):
+    if request.method != "GET":
+        return HttpResponse("<h1>Not Found</h1>");
+
+    data = request.POST.get("data")
+    json_data = json.loads(data)
+    email = json_data['userEmailId']
+    print("json %s" % data)
+    print("email %s " % email)
+    user = Registration.objects.get(email=email)
+    user.is_paid = True
+    user.save()

@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.registration),
     path('register/', views.register),
+    path('payment/complete/', views.payment_complete),
 ]
