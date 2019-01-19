@@ -95,7 +95,7 @@ def complete_payment(request):
         if answer['question'] == 'College':
             college = answer['question']
         elif answer['question'] == 'Contact Number':
-            phone = answer['question']
+            phone = answer['question'][3:]
         elif answer['question'] == 'T Shirt Size':
             tshirt = answer['question']
         elif answer['question'] == 'Food':

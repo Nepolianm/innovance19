@@ -20,4 +20,4 @@ class Registration(models.Model):
     college = models.CharField(max_length=100)
     t_shirt_size = models.CharField(max_length=1, choices=choices)
     referral_code = models.CharField(max_length=10, blank=True, null=True)
-    is_paid = models.BooleanField(default=False)
+    is_paid = models.BooleanField(default=True)
