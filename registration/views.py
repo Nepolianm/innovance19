@@ -1,7 +1,7 @@
 import datetime
 import urllib
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from innovance import settings
 from django.shortcuts import render
@@ -120,6 +120,7 @@ def complete_payment(request):
                                     is_ieee_member=is_ieee, member_id=member_id, college=college, t_shirt_size=tshirt,
                                     referral_code=referral)
 
+    return JsonResponse( {'status':1})
     # user = Registration.objects.get(email=email)
     # user.is_paid = True
     # user.save()
