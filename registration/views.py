@@ -1,7 +1,7 @@
 import datetime
 import urllib
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from innovance import settings
 from django.shortcuts import render
@@ -58,6 +58,7 @@ def send_sms(recepient, name, email):
     data = urllib.parse.urlencode({'apikey': settings.TEXTLOCAL_APIKEY, 'numbers': recepient,
                                    'message': message})
     data = data.encode('utf-8')
+    print("phone number %s" % recepient)
     request = urllib.request.Request("https://api.textlocal.in/send/?")
     f = urllib.request.urlopen(request, data)
     fr = f.read()
@@ -77,16 +78,49 @@ def complete_payment(request):
 
     name = json_data['userName']
     ticketPrice = json_data['ticketPrice']
-    answerList = json.loads(json_data['answerList'])
+    answerList = json_data['answerList']
     order_id = json_data['uniqueOrderId']
     timestamp = json_data['registrationTimestamp']
+    phone = ""
+    college = ""
+    tshirt = ""
+    is_veg = True
+    accomm = True
+    referral = ""
+    is_ieee = True
+    member_id = ""
     print("name %s\nprice %s\nanswerList " % (name, ticketPrice), answerList)
     print("order_id %s\n timestamp %s" % (order_id, timestamp))
 
     for answer in answerList:
-        if answer['question'] == 'Contact Number':
-            send_sms(answer['question'], name, email )
-            break
+        if answer['question'] == 'College':
+            college = answer['answer']
+        elif answer['question'] == 'Contact Number':
+            phone = answer['answer'][3:]
+        elif answer['question'] == 'T Shirt Size':
+            tshirt = answer['answer']
+        elif answer['question'] == 'Food':
+            if answer['answer'] != "Vegetarian":
+                is_veg = False
+        elif answer['question'] == 'Referral Code':
+            referral = answer['answer']
+        elif answer['question'] == 'Accommodation Needed':
+            if answer['answer'] == 'No':
+                accomm = False
+        elif answer['question'] == 'IEEE Membership ID':
+            member_id = answer['answer']
+
+    if ticketPrice == 20:
+        is_ieee = False
+
+    print("phone %s" % phone)
+    send_sms(phone, name, email)
+
+    r = Registration.objects.create(name=name, email=email, mob=phone, is_veg=is_veg, accommodation=accomm,
+                                    is_ieee_member=is_ieee, member_id=member_id, college=college, t_shirt_size=tshirt,
+                                    referral_code=referral)
+
+    return JsonResponse( {'status':1})
     # user = Registration.objects.get(email=email)
     # user.is_paid = True
     # user.save()
