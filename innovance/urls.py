@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
 from registration import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.registration),
+    path('coming-soon/', TemplateView.as_view(template_name='hello.html')),
     path('payment/complete/', views.complete_payment),
 ]

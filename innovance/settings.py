@@ -25,7 +25,7 @@ SECRET_KEY = 'uzyfygqkq$7wh%ir1i8vh3b%54+a#9ok%x=1z_wbt*qi@may=#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'dev.innovance19.in', 'innovance19.in']
+ALLOWED_HOSTS = ['127.0.0.1','0.0.0.0', 'localhost', 'dev.innovance19.in', 'innovance19.in']
 
 
 # Application definition
@@ -75,18 +75,18 @@ WSGI_APPLICATION = 'innovance.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'innovance',
-        'USER': 'ieee',
-        'PASSWORD': 'Innovance19@8910',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'innovance',
+    #     'USER': 'ieee',
+    #     'PASSWORD': 'Innovance19@8910',
+    #     'HOST': 'localhost',
+    #     'PORT': '',
+    # }
 }
 
 
@@ -129,6 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'static',
+    'video',
 ]
 
 
