@@ -11,7 +11,7 @@ class Registration(models.Model):
         ('XXL', 'XXL')
     )
     name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    email = models.EmailField(max_length=100, unique=True)
     mob = models.CharField(max_length=13)
     is_veg = models.BooleanField(default=True)
     accommodation = models.BooleanField(default=True)
@@ -20,3 +20,4 @@ class Registration(models.Model):
     college = models.CharField(max_length=100)
     t_shirt_size = models.CharField(max_length=1, choices=choices)
     referral_code = models.CharField(max_length=10, blank=True, null=True)
+    is_paid = models.BooleanField(default=False)
