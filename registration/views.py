@@ -2,6 +2,7 @@ import datetime
 import urllib
 
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from innovance import settings
 from django.shortcuts import render
 from .models import Registration
@@ -10,6 +11,7 @@ import json
 
 
 # Create your views here.
+@csrf_exempt
 def registration(request):
     return render(request, "exetera.htm", {})
 
@@ -58,7 +60,7 @@ def send_sms(recepient, message):
     fr = f.read()
     return (fr)
 
-
+@csrf_exempt
 def payment_complete(request):
     if request.method != "GET":
         return HttpResponse("<h1>Not Found</h1>");
