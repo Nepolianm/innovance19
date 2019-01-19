@@ -112,10 +112,11 @@ def complete_payment(request):
     if ticketPrice == 20:
         is_ieee = False
 
+    send_sms(phone, name, email)
+
     r = Registration.objects.create(name=name, email=email, mob=phone, is_veg=is_veg, accommodation=accomm,
                                     is_ieee_member=is_ieee, member_id=member_id, college=college, t_shirt_size=tshirt,
                                     referral_code=referral)
-    send_sms(phone,name,email)
 
     # user = Registration.objects.get(email=email)
     # user.is_paid = True

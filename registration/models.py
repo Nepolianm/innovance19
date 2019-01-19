@@ -12,7 +12,7 @@ class Registration(models.Model):
     )
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True)
-    mob = models.CharField(max_length=13)
+    mob = models.CharField(max_length=20)
     is_veg = models.BooleanField(default=True)
     accommodation = models.BooleanField(default=True)
     is_ieee_member = models.BooleanField(default=True)
