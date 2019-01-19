@@ -58,6 +58,7 @@ def send_sms(recepient, name, email):
     data = urllib.parse.urlencode({'apikey': settings.TEXTLOCAL_APIKEY, 'numbers': recepient,
                                    'message': message})
     data = data.encode('utf-8')
+    print("phone number %s" % recepient)
     request = urllib.request.Request("https://api.textlocal.in/send/?")
     f = urllib.request.urlopen(request, data)
     fr = f.read()
@@ -112,6 +113,7 @@ def complete_payment(request):
     if ticketPrice == 20:
         is_ieee = False
 
+    print("phone %s" % phone)
     send_sms(phone, name, email)
 
     r = Registration.objects.create(name=name, email=email, mob=phone, is_veg=is_veg, accommodation=accomm,

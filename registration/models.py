@@ -18,6 +18,6 @@ class Registration(models.Model):
     is_ieee_member = models.BooleanField(default=True)
     member_id = models.CharField(max_length=100, null=True, blank=True)
     college = models.CharField(max_length=100)
-    t_shirt_size = models.CharField(max_length=1, choices=choices)
+    t_shirt_size = models.CharField(max_length=10, choices=choices)
     referral_code = models.CharField(max_length=10, blank=True, null=True)
     is_paid = models.BooleanField(default=True)
