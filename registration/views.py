@@ -60,9 +60,10 @@ def send_sms(recepient, message):
     fr = f.read()
     return (fr)
 
+
 @csrf_exempt
 def complete_payment(request):
-    if request.method != "GET":
+    if request.method != "POST":
         return HttpResponse("<h1>Not Found</h1>")
 
     data = request.POST.get("data")
@@ -70,6 +71,14 @@ def complete_payment(request):
     email = json_data['userEmailId']
     print("json %s" % data)
     print("email %s " % email)
+
+    name = json_data['userName']
+    ticketPrice = json_data['ticketPrice']
+    answerList = json.loads(json_data['answerList'])
+    order_id = json_data['uniqueOrderId']
+    timestamp = json_data['registrationTimestamp']
+    print("name %s\nprice %s\nanswerList " % (name, ticketPrice), answerList)
+    print("order_id %s\n timestamp %s" % (order_id, timestamp))
     # user = Registration.objects.get(email=email)
     # user.is_paid = True
     # user.save()
