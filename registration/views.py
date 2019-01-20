@@ -110,7 +110,7 @@ def complete_payment(request):
         elif answer['question'] == 'IEEE Membership ID':
             member_id = answer['answer']
 
-    if ticketPrice == 20:
+    if ticketPrice == 1500:
         is_ieee = False
 
     print("phone %s" % phone)
